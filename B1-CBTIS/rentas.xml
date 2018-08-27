@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.2.11
+- http://www.phpmyadmin.net
+-
+- Servidor: 127.0.0.1
+- Tiempo de generación: 01-01-2007 a las 09:34:53
+- Versión del servidor: 5.6.21
+- Versión de PHP: 5.6.3
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="http://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="blockbuster" collation="latin1_swedish_ci" charset="latin1">
+            <pma:table name="rentas">
+                CREATE TABLE `rentas` (
+                  `factura` int(11) NOT NULL,
+                  `num_socio` int(11) DEFAULT NULL,
+                  `clave_pel` int(11) DEFAULT NULL,
+                  `fecha_alquiler` date DEFAULT NULL,
+                  `pagada` tinyint(1) DEFAULT NULL,
+                  PRIMARY KEY (`factura`),
+                  KEY `num_socio` (`num_socio`),
+                  KEY `clave_pel` (`clave_pel`),
+                  CONSTRAINT `clave_pel` FOREIGN KEY (`clave_pel`) REFERENCES `peliculas` (`clave_pel`),
+                  CONSTRAINT `num_socio` FOREIGN KEY (`num_socio`) REFERENCES `socios` (`num_socio`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Base de datos: 'blockbuster'
+    -->
+    <database name="blockbuster">
+        <!-- Tabla rentas -->
+        <table name="rentas">
+            <column name="factura">1</column>
+            <column name="num_socio">1</column>
+            <column name="clave_pel">1</column>
+            <column name="fecha_alquiler">2005-01-01</column>
+            <column name="pagada">1</column>
+        </table>
+        <table name="rentas">
+            <column name="factura">2</column>
+            <column name="num_socio">2</column>
+            <column name="clave_pel">2</column>
+            <column name="fecha_alquiler">2005-01-06</column>
+            <column name="pagada">0</column>
+        </table>
+        <table name="rentas">
+            <column name="factura">3</column>
+            <column name="num_socio">3</column>
+            <column name="clave_pel">3</column>
+            <column name="fecha_alquiler">2005-12-23</column>
+            <column name="pagada">0</column>
+        </table>
+    </database>
+</pma_xml_export>

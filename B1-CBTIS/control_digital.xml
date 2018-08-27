@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.1.14
+- http://www.phpmyadmin.net
+-
+- Servidor: 127.0.0.1
+- Tiempo de generación: 29-05-2015 a las 02:20:14
+- Versión del servidor: 5.6.17
+- Versión de PHP: 5.5.12
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="http://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="control_digital" collation="latin1_swedish_ci" charset="latin1">
+            <pma:table name="clientes">
+                CREATE TABLE `clientes` (
+                  `num_cliente` int(11) NOT NULL,
+                  `nombre_cte` varchar(30) DEFAULT NULL,
+                  `ape_cte` varchar(30) DEFAULT NULL,
+                  `tel_cte` varchar(10) DEFAULT NULL,
+                  PRIMARY KEY (`num_cliente`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="compras">
+                CREATE TABLE `compras` (
+                  `folio2` int(11) NOT NULL,
+                  `cod_prov` int(11) NOT NULL,
+                  `fecha2` date DEFAULT NULL,
+                  `cant` int(11) DEFAULT NULL,
+                  PRIMARY KEY (`folio2`),
+                  KEY `cod_prov` (`cod_prov`),
+                  CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`cod_prov`) REFERENCES `proveedores` (`cod_prov`) ON DELETE CASCADE ON UPDATE CASCADE
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="computadoras">
+                CREATE TABLE `computadoras` (
+                  `cod_comp` int(11) NOT NULL,
+                  `caracteristicas` varchar(30) DEFAULT NULL,
+                  `precio` float DEFAULT NULL,
+                  `marca` varchar(15) DEFAULT NULL,
+                  `stock` bit(1) DEFAULT NULL,
+                  `tamaño` varchar(5) DEFAULT NULL,
+                  PRIMARY KEY (`cod_comp`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="empleados">
+                CREATE TABLE `empleados` (
+                  `num_emp` int(11) NOT NULL,
+                  `nombre` varchar(30) DEFAULT NULL,
+                  `apellidos` varchar(30) DEFAULT NULL,
+                  `rfc2` varchar(10) DEFAULT NULL,
+                  `tel` varchar(10) DEFAULT NULL,
+                  PRIMARY KEY (`num_emp`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="proveedores">
+                CREATE TABLE `proveedores` (
+                  `cod_prov` int(11) NOT NULL,
+                  `nombre` varchar(30) DEFAULT NULL,
+                  `apellido` varchar(30) DEFAULT NULL,
+                  `domcilio` varchar(35) DEFAULT NULL,
+                  `rfc` varchar(10) DEFAULT NULL,
+                  `tel` varchar(10) DEFAULT NULL,
+                  PRIMARY KEY (`cod_prov`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="ventas">
+                CREATE TABLE `ventas` (
+                  `folio` int(11) NOT NULL,
+                  `fecha` date DEFAULT NULL,
+                  `cod_comp` int(11) NOT NULL,
+                  `num_cliente` int(11) NOT NULL,
+                  `suma` float DEFAULT NULL,
+                  `num_emp` int(11) NOT NULL,
+                  PRIMARY KEY (`folio`),
+                  KEY `num_cliente` (`num_cliente`),
+                  KEY `num_emp` (`num_emp`),
+                  KEY `ventas_ibfk_1` (`cod_comp`),
+                  CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`cod_comp`) REFERENCES `computadoras` (`cod_comp`) ON DELETE CASCADE ON UPDATE CASCADE,
+                  CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`num_cliente`) REFERENCES `clientes` (`num_cliente`) ON DELETE CASCADE ON UPDATE CASCADE,
+                  CONSTRAINT `ventas_ibfk_3` FOREIGN KEY (`num_emp`) REFERENCES `empleados` (`num_emp`) ON DELETE CASCADE ON UPDATE CASCADE
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Base de datos: 'control_digital'
+    -->
+    <database name="control_digital">
+        <!-- Tabla clientes -->
+        <table name="clientes">
+            <column name="num_cliente">11</column>
+            <column name="nombre_cte">ramon</column>
+            <column name="ape_cte">de la cruz</column>
+            <column name="tel_cte">8341567889</column>
+        </table>
+        <table name="clientes">
+            <column name="num_cliente">12</column>
+            <column name="nombre_cte">armando</column>
+            <column name="ape_cte">zuñiga</column>
+            <column name="tel_cte">8341254512</column>
+        </table>
+        <table name="clientes">
+            <column name="num_cliente">13</column>
+            <column name="nombre_cte">oscar</column>
+            <column name="ape_cte">martinez</column>
+            <column name="tel_cte">8321452536</column>
+        </table>
+        <!-- Tabla compras -->
+        <table name="compras">
+            <column name="folio2">101</column>
+            <column name="cod_prov">101</column>
+            <column name="fecha2">2015-01-15</column>
+            <column name="cant">100</column>
+        </table>
+        <table name="compras">
+            <column name="folio2">102</column>
+            <column name="cod_prov">102</column>
+            <column name="fecha2">2001-02-15</column>
+            <column name="cant">95</column>
+        </table>
+        <table name="compras">
+            <column name="folio2">103</column>
+            <column name="cod_prov">103</column>
+            <column name="fecha2">2002-02-15</column>
+            <column name="cant">90</column>
+        </table>
+        <!-- Tabla computadoras -->
+        <table name="computadoras">
+            <column name="cod_comp">11</column>
+            <column name="caracteristicas">computadora personal</column>
+            <column name="precio">9000</column>
+            <column name="marca">Hp</column>
+            <column name="stock">1</column>
+            <column name="tamaño">grand</column>
+        </table>
+        <table name="computadoras">
+            <column name="cod_comp">12</column>
+            <column name="caracteristicas">computadora portatil</column>
+            <column name="precio">7500</column>
+            <column name="marca">Acer</column>
+            <column name="stock">1</column>
+            <column name="tamaño">media</column>
+        </table>
+        <table name="computadoras">
+            <column name="cod_comp">13</column>
+            <column name="caracteristicas">impresora</column>
+            <column name="precio">800</column>
+            <column name="marca">Cannon</column>
+            <column name="stock">1</column>
+            <column name="tamaño">short</column>
+        </table>
+        <!-- Tabla empleados -->
+        <table name="empleados">
+            <column name="num_emp">11</column>
+            <column name="nombre">Aldahir Joe</column>
+            <column name="apellidos">Vargas Moreno</column>
+            <column name="rfc2">VAMO060274</column>
+            <column name="tel">8341562346</column>
+        </table>
+        <table name="empleados">
+            <column name="num_emp">12</column>
+            <column name="nombre">Samuel Osvaldo</column>
+            <column name="apellidos">Cano Walle</column>
+            <column name="rfc2">CAWA151289</column>
+            <column name="tel">8331234568</column>
+        </table>
+        <table name="empleados">
+            <column name="num_emp">13</column>
+            <column name="nombre">Gabriela Juanita</column>
+            <column name="apellidos">Castillo Martinez</column>
+            <column name="rfc2">CAMA250469</column>
+            <column name="tel">8111245241</column>
+        </table>
+        <!-- Tabla proveedores -->
+        <table name="proveedores">
+            <column name="cod_prov">101</column>
+            <column name="nombre">Jorge Alberto</column>
+            <column name="apellido">Reyes De la Cruz</column>
+            <column name="domcilio">Cd Victoria,Tamps</column>
+            <column name="rfc">RECO060189</column>
+            <column name="tel">8112534512</column>
+        </table>
+        <table name="proveedores">
+            <column name="cod_prov">102</column>
+            <column name="nombre">Graciela</column>
+            <column name="apellido">De la Rosa Zuñiga</column>
+            <column name="domcilio">Matamoros,Tamps</column>
+            <column name="rfc">DEZU050275</column>
+            <column name="tel">8321523421</column>
+        </table>
+        <table name="proveedores">
+            <column name="cod_prov">103</column>
+            <column name="nombre">Luis Alonso</column>
+            <column name="apellido">Garcia Vazquez</column>
+            <column name="domcilio">Reynosa,Tamps</column>
+            <column name="rfc">GAVA250673</column>
+            <column name="tel">8341562536</column>
+        </table>
+        <!-- Tabla ventas -->
+        <table name="ventas">
+            <column name="folio">11</column>
+            <column name="fecha">2008-02-12</column>
+            <column name="cod_comp">11</column>
+            <column name="num_cliente">11</column>
+            <column name="suma">10000</column>
+            <column name="num_emp">11</column>
+        </table>
+        <table name="ventas">
+            <column name="folio">12</column>
+            <column name="fecha">2009-02-09</column>
+            <column name="cod_comp">12</column>
+            <column name="num_cliente">12</column>
+            <column name="suma">99999</column>
+            <column name="num_emp">12</column>
+        </table>
+        <table name="ventas">
+            <column name="folio">13</column>
+            <column name="fecha">2012-12-12</column>
+            <column name="cod_comp">13</column>
+            <column name="num_cliente">13</column>
+            <column name="suma">88888</column>
+            <column name="num_emp">13</column>
+        </table>
+    </database>
+</pma_xml_export>
